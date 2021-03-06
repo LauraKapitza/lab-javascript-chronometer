@@ -5,7 +5,7 @@ class Chronometer {
   }
   startClick(callback) {
     let chronometer = this;
-    setInterval(function() {
+    this.intervalId = setInterval(function() {
       chronometer.currentTime += 1;
     }, 1000)
   }
@@ -19,12 +19,14 @@ class Chronometer {
     return ('0'+value).slice(-2);
   }
   stopClick() {
-    // ... your code goes here
+    clearInterval(this.intervalId);
   }
   resetClick() {
-    // ... your code goes here
+    this.currentTime = 0;
   }
   splitClick() {
-    // ... your code goes here
+    let min = this.getMinutes()
+    let sec = this.getSeconds()
+    return `${('0'+min).slice(-2)}:${('0'+sec).slice(-2)}`;
   }
 }
