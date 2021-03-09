@@ -14,15 +14,28 @@ let milUni = document.getElementById('milUni');
 let splits = document.getElementById('splits');
 
 function printTime() {
-  // ... your code goes here
+  // call function printMinutes and printSeconds
+  let min = printMinutes();
+  let sec = printSeconds();
+
+  minDec.innerHTML = "";
+  minUni.innerHTML = "";
+
+  secDec.innerHTML = "";
+  secUni.innerHTML = "";
 }
 
 function printMinutes() {
-  // ... your code goes here
+  // get the minutes
+  let min = chronometer.getMinutes();
+  return chronometer.twoDigitsNumber(min); //'xx'
+
 }
 
 function printSeconds() {
-  // ... your code goes here
+  // get the seconds
+  let sec = chronometergetSeconds();
+  return chronometer.twoDigitsNumber(sec); //'xx'
 }
 
 // ==> BONUS
@@ -31,7 +44,7 @@ function printMilliseconds() {
 }
 
 function printSplit() {
-  // ... your code goes here
+  chronometer.splitClick(); //'xx:xx'
 }
 
 function clearSplits() {
@@ -39,27 +52,47 @@ function clearSplits() {
 }
 
 function setStopBtn() {
-  // ... your code goes here
+  
 }
 
 function setSplitBtn() {
   // ... your code goes here
+  chronometer.splitClick(printTime);
 }
 
 function setStartBtn() {
   // ... your code goes here
+  chronometer.startClick(printTime);
 }
 
 function setResetBtn() {
   // ... your code goes here
+  chronometer.resetClick();
 }
 
 // Start/Stop Button
 btnLeft.addEventListener('click', () => {
-  // ... your code goes here
+  //change btn from START to STOP
+  //chronometer.startClick(printTime);
+  console.log('NOOOOOOOO')
+  btnLeft.innerHTML = "STOP";
+  btnLeft.setAttribute("class", "btn stop");
+
+//change btn from STOP to START
+  //chronometer.stopClick(printTime);
+  //btnLeft.innerHTML = "START";
+  //btnLeft.setAttribute("class", "btn start");
 });
 
 // Reset/Split Button
 btnRight.addEventListener('click', () => {
-  // ... your code goes here
+  //change btn from RESET to SPLIT
+  //chronometer.splitClick(printTime);
+  btnRight.innerHTML = "SPLIT";
+  btnRight.setAttribute("class", "btn split")
+
+  //change btn from SPLIT to RESET
+  //chronometer.resetClick(printTime);
+  btnRight.innerHTML = "RESET";
+  btnRight.setAttribute("class", "btn reset")
 });
