@@ -20,6 +20,12 @@ function printTime() {
   printMilliseconds();
 }
 
+function clearTime() {
+  clearMinutes();
+  clearSeconds();
+  clearMilliseconds();
+}
+
 function printMinutes() {
   // get the minutes
   let min = chronometer.twoDigitsNumber(chronometer.getMinutes());
@@ -37,16 +43,32 @@ function printSeconds() {
 
 // ==> BONUS
 function printMilliseconds() {
-  // ... your code goes here
+
 }
 
-function printSplit() {
-  let splitTime = chronometer.splitClick(); //'xx:xx'
-  console.log(splitTime)
+function clearMinutes() {
+  //clear minutes printed
+  minDec.innerHTML = 0;
+  minUni.innerHTML = 0;
+}
+
+function clearSeconds() {
+  //clear seconds printed
+  secDec.innerHTML = 0;
+  secUni.innerHTML = 0;
+}
+
+function clearMilliseconds() {
+  milDec.innerHTML = 0;
+  milUni.innerHTML = 0;
 }
 
 function clearSplits() {
-  // ... your code goes here
+  let listItems = splits.querySelectorAll('li');
+  listItems.forEach(li => {
+    li.remove();
+  })
+
 }
 
 function setStopBtn() {
@@ -78,12 +100,12 @@ function setResetBtn() {
 btnLeft.addEventListener('click', () => {
   if(btnLeft.innerHTML == "START") {
     chronometer.startClick(printTime);
-    setStopBtn();
-    setSplitBtn();
+    setStopBtn(); //change left btn to STOP 
+    setSplitBtn(); // change right btn to SPLIT
   } else {
     chronometer.stopClick();
-    setStartBtn();
-    setResetBtn();
+    setStartBtn(); //change left btn to START
+    setResetBtn(); //change right btn to RESET
   }
 });
 
@@ -91,10 +113,13 @@ btnLeft.addEventListener('click', () => {
 btnRight.addEventListener('click', () => {
   switch (btnRight.innerHTML) {
     case 'SPLIT':
-      chronometer.splitClick();
+      var splitTime = chronometer.splitClick(); //get the split time
+      printSplit(splitTime); //printing the split time
       break;
     case 'RESET':
-      chronometer.resetClick();
+      chronometer.resetClick(); //reset the time
+      clearTime(); //reset printed time
+      clearSplits(); //reset splits printed
       break;
   };
 });
